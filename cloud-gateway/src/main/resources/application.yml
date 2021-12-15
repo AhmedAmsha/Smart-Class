@@ -1,0 +1,29 @@
+server:
+    port: 9191
+
+spring:
+    application:
+        name: API-GATWAY
+        
+cloud:
+    gateway:
+        routes:
+            - id: STUDENTASSIGNMENT-SERVICE
+              uri: lb://STUDENTASSIGNMENT-SERVICE
+              predicates:
+                  - Path = /studentassignment/**
+            - id: ASSIGNMENT-SERVICE
+              uri: lb://ASSIGNMENT-SERVICE
+              predicates:
+                  - Path = /assignments/**                
+                  
+                    
+eureka:
+    clinet:
+        register-with-eureka : true
+        fetch-registry : true
+        service - url:
+            defaultZone: http://localhost:8761/eureka/
+    instance : 
+        hotsname: localhost
+        
